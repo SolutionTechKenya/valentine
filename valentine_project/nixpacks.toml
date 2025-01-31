@@ -1,0 +1,13 @@
+[phases.setup]
+nixPkgs = ["python313", "pip", "postgresql", "git"]
+
+[phases.build]
+cmds = [
+  "pip install -r requirements.txt"
+]
+
+[phases.start]
+cmds = [
+  "python manage.py migrate",
+  "gunicorn valentine_project.wsgi:application --bind 0.0.0.0:$PORT"
+]
